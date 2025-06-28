@@ -1,0 +1,26 @@
+{
+  "Params": {
+    "All": {
+      "_id": "0uxuPY0cbmQhpEz1",
+      "administrador": "true",
+      "email": "fulano@qa.com",
+      "nome": "Fulano da Silva",
+      "password": "teste"
+    },
+    "_id": {
+      "_id": "0uxuPY0cbmQhpEz1"
+    },
+    "administrador": {
+      "administrador": "true"
+    },
+    "email": {
+      "email": "fulano@qa.com"
+    },
+    "nome": {
+      "nome": "Fulano da Silva"
+    },
+    "password": {
+      "password": "teste"
+    }
+  }
+}
