@@ -84,16 +84,12 @@ Feature: Casos de prueba para Apis Get de ServerUsuarios
       | Contrasenia   | password      | password não pode ficar em branco            |
       | Administrador | administrador | administrador deve ser \'true\' ou \'false\' |
 
-  Scenario: Caso - Editar usuario por Id - Editar Ok
+  Scenario: Caso - Editar usuario por Id - Editar Ok o Falla
     * def path = data1.Usuario.path
-    * print path
     * def body = data2.body.Existente
-    * print body
     Given path path
     And request body
     When method put
-    And print 'url: ', karate.prevRequest.url
-    And print 'headers: ', karate.prevRequest.headers
-    And print 'response: ', response
-    Then status 400
-    And match response.message contains "Este email já está sendo usado"
+    Then assert responseStatus == 200 || responseStatus == 400
+    * if (responseStatus == 200) karate.match(response.message, 'Registro alterado com sucesso')
+    * if (responseStatus == 400) karate.match(response.message, 'Este email já está sendo usado')

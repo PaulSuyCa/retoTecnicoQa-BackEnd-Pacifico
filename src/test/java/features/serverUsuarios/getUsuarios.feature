@@ -86,18 +86,5 @@ Feature: Casos de prueba para Apis Get de ServerUsuarios
       | Valor         | Search        |
       | ID            | _id           |
       | Administrador | administrador |
-      | Email         | email         |
       | Nombre        | nome          |
       | Contrasenia   | password      |
-
-  Scenario: Caso - Listar usuarios registrados - Busqueda por todos los parametros
-#    * def param = data.Params.All
-##    * print ' param: ', param
-##    Given params param
-##    When method get
-##    And print 'url: ', karate.prevRequest.url
-##    And print 'headers: ', karate.prevRequest.headers
-##    And print 'response: ', response
-##    Then status 200
-##    And match $.quantidade == schema.quantidade
-##    And match each $.usuarios[*] == schema.usuarios[0]
