@@ -1,0 +1,44 @@
+name: Karate API Tests - Dev - Cert
+
+on:
+  workflow_dispatch:  # Permite ejecución manual
+    inputs:
+      ambiente:
+        description: 'Selecciona el entorno'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - cert
+
+jobs:
+  run-karate-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Cache Maven dependencias
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven
+
+      - name: Ejecutar pruebas Karate con tag
+        run: mvn clean test -Dkarate.env=${{ github.event.inputs.ambiente }} -Dkarate.options="--tags @ServerUsuarios"
+
+      - name: Guardar reporte como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: karate-report
+          path: target/cucumber-html-reports
